@@ -1,0 +1,45 @@
+
+http://5.9.127.172/poslanik
+
+I pocetna strana
+
+1. *pretraga po imenu i prezimenu 
+	ili filter
+
+	1.1. filteri : 
+		*fotografija
+		tema kojima se poslanici bave
+		*stranka
+		*poslanički klub
+		*prebivaliste (mesto rođenja)
+		*zanimanje (profesija)
+		- članstvo u odborima (scrap sa parlament.gov.rs)
+		*pol
+		- članstvo u grupama prijateljstava (scrap sa parlament.gov.rs)
+		godine
+		nacionalna pripadnost (manjinska stranka)
+		broj promena stranka ("preletanje")
+2. mapa (10-20 poslanika) - 
+		pinovi poslanika
+
+
+II strana - pretrage
+III stranica - profil poslanika 
+	biografija
+	integracija sa istinomerom
+	press clipping - rss feed naslovi.rs
+	kontakt podaci
+	social media podaci (tw, fb handle)
+	mapa prebivalista
+	istinomer bar, ranking na istinomeru - prvi na istinomeru po istinitosti
+
+further develpoment:
+	AI analiza preferncija na osnovu njihovih govora/tekstova
+	istorija preferncija - kako su glasali poslanici
+
+
+Nakon Kostinog feedback-a:
+- Integracija YT govora: https://developers.google.com/youtube/v3/docs/search/list
+
+
+

@@ -6,6 +6,10 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <title>Upoznaj svog poslanika</title>
+
+     <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
+    </script>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -18,9 +22,18 @@
         margin: 0;
         padding: 0;
       }
+
+      .videoPoslanika{
+      	max-width: 100px;
+      }
     </style>
   </head>
   <body>
+
+	<div id="slickeTest">
+		
+	</div>
+
     <div id="map"></div>
     <script>
 
@@ -42,26 +55,47 @@
     function listaYTvidea(argument) {
     	$.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q='+  "nenad canak" + '&maxResults=15&order=date&key=AIzaSyC4AE6JNj2vQx_-XpLWHtV4-v5uQR-fM1Q',  function(json, textStatus) {
     			
-    			console.log(json);
+    			var videos = json.items;
+
+    			console.log(videos);
+
+    			for (var i = 0; i < videos.length; i++) {
+
+    				var videoInfo = videos[i].snippet;
+    				var videoId = videos[i].id.videoId;
+
+    				$("#slickeTest").append(' <a target="_blank" href="https://www.youtube.com/watch?v='+videoId+'"><img class="videoPoslanika" src="'+videoInfo.thumbnails.high.url+'" alt="'+ videoInfo.title+'" /> </a>')	
+
+    			}
     			
     	});
     }
   
 
+ 	var map ;
+
       function initMap() {
         var myLatLng = {lat: 44.363, lng: 20.044};
 
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           zoom: 9,
           center: myLatLng
         });
 
-        for (var i = 0; i < 100; i++) {
+        initHandler();
+
+        listaYTvidea();
+
+      }
+
+    function initHandler(argument) {
+      
+   	google.maps.event.addListenerOnce(map, 'idle', function(){
+	    for (var i = 0; i < 100; i++) {
 
         	var pomX = Math.random();
         	var pomY = Math.random(); 	
 
-        	//
 
         	var marker = new google.maps.Marker({
 	          position: {lat: sirina + pomX, lng: duzina +pomY },
@@ -80,11 +114,14 @@
         }
 
 
-        
-      }
+	}); //idle handler
+
+
+	
+ 	} //initHandler
+
+
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
-    </script>
+   
   </body>
 </html>

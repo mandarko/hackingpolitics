@@ -2,4 +2,4 @@
 
 Please, fork this repo
 
-pogledati [wiki](wiki)
+pogledati [wiki](https://github.com/crtarsorg/hackingpolitics/wiki)

@@ -28,7 +28,7 @@
     var duzina  ; 
 
     $.getJSON('poslanici.json',  function(json, textStatus) {
-    		console.log(json);
+    		
     		sirina = 44.32 ; 
     		duzina = 20 ; 
 
@@ -37,6 +37,15 @@
 
     //lokacije mesta rodjenja
 
+
+
+    function listaYTvidea(argument) {
+    	$.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q='+  "nenad canak" + '&maxResults=15&order=date&key=AIzaSyC4AE6JNj2vQx_-XpLWHtV4-v5uQR-fM1Q',  function(json, textStatus) {
+    			
+    			console.log(json);
+    			
+    	});
+    }
   
 
       function initMap() {
@@ -52,6 +61,7 @@
         	var pomX = Math.random();
         	var pomY = Math.random(); 	
 
+        	//
 
         	var marker = new google.maps.Marker({
 	          position: {lat: sirina + pomX, lng: duzina +pomY },

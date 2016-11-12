@@ -1,160 +1,177 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-
-	
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
-
-	
     <title>Upoznaj svog poslanika</title>
-
-     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
     </script>
     <style>
-      /* Always set the map height explicitly to define the size of the div
+    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
+    
+    #map {
         height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
+    }
+    /* Optional: Makes the sample page fill the window. */
+    
+    html,
+    body {
         height: 100%;
         margin: 0;
         padding: 0;
-      }
-
-      .videoPoslanika{
-      	max-width: 100px;
-      }
+    }
+    
+    .videoPoslanika {
+        max-width: 100px;
+    }
     </style>
-  </head>
-  <body>
+</head>
 
-
-
-	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-	        <p>One fine body&hellip;</p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-
-
-
-	<div id="slickeTest">
-		
-	</div>
-
+<body>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div id="slickeTest">
+    </div>
     <div id="map"></div>
     <script>
+    var sirina;
+    var duzina;
 
-    var sirina  ; 
-    var duzina  ; 
+    $.getJSON('poslanici.json', function(json, textStatus) {
 
-    $.getJSON('poslanici.json',  function(json, textStatus) {
-    		
-    		sirina = 44.32 ; 
-    		duzina = 20 ; 
+        sirina = 44.32;
+        duzina = 20;
 
     });
-    
+
 
     //lokacije mesta rodjenja
 
 
+    function getRSS(param) {
+
+
+
+        $.get("http://www.naslovi.net/rss/search.php?q=nenad+canak", function(data) {
+
+            $(data).find("item").each(function() { // or "item" or whatever suits your feed
+                var el = $(this);
+
+                console.log("------------------------");
+                console.log("title      : " + el.find("title").text());
+                console.log("link     : " + el.find("link").text());
+                console.log("description: " + el.find("description").text());
+                console.log("pubDate: " + el.find("pubDate").text());
+            });
+        });
+
+
+    }
+
 
     function listaYTvidea(argument) {
-    	$.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q='+  "nenad canak" + '&maxResults=15&order=date&key=AIzaSyC4AE6JNj2vQx_-XpLWHtV4-v5uQR-fM1Q',  function(json, textStatus) {
-    			
-    			var videos = json.items;
+        $.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + "nenad canak" + '&maxResults=15&order=date&key=AIzaSyC4AE6JNj2vQx_-XpLWHtV4-v5uQR-fM1Q', function(json, textStatus) {
 
-    			console.log(videos);
+            var videos = json.items;
 
-    			for (var i = 0; i < videos.length; i++) {
+            console.log(videos);
+            $(".modal-body").empty();
 
-    				var videoInfo = videos[i].snippet;
-    				var videoId = videos[i].id.videoId;
+            for (var i = 0; i < videos.length; i++) {
 
-    				$("#slickeTest").append(' <a target="_blank" href="https://www.youtube.com/watch?v='+videoId+'"><img class="videoPoslanika" src="'+videoInfo.thumbnails.high.url+'" alt="'+ videoInfo.title+'" /> </a>')	
+                var videoInfo = videos[i].snippet;
+                var videoId = videos[i].id.videoId;
 
-    			}
-    			
-    	});
+                $(".modal-body").append(' <a target="_blank" href="https://www.youtube.com/watch?v=' + videoId + '"><img class="videoPoslanika" src="' + videoInfo.thumbnails.high.url + '" alt="' + videoInfo.title + '" /> </a>')
+
+            }
+
+        });
     }
-  
 
- 	var map ;
 
-      function initMap() {
-        var myLatLng = {lat: 44.363, lng: 20.044};
+    var map;
+
+    function initMap() {
+        var myLatLng = {
+            lat: 44.363,
+            lng: 20.044
+        };
 
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 9,
-          center: myLatLng
+            zoom: 9,
+            center: myLatLng
         });
 
         initHandler();
 
         listaYTvidea();
 
-      }
+    }
 
     function initHandler(argument) {
-      
-   	google.maps.event.addListenerOnce(map, 'idle', function(){
-	    for (var i = 0; i < 100; i++) {
 
-        	var pomX = Math.random();
-        	var pomY = Math.random(); 	
+        google.maps.event.addListenerOnce(map, 'idle', function() {
+            for (var i = 0; i < 100; i++) {
 
-
-        	var marker = new google.maps.Marker({
-	          position: {lat: sirina + pomX, lng: duzina +pomY },
-	          map: map,
-	          title: 'Hello World!',
-	          details: {opis:"bilo koji podatak * " +i, poruka:"vidimo se" +i }
-	        });
+                var pomX = Math.random();
+                var pomY = Math.random();
 
 
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: sirina + pomX,
+                        lng: duzina + pomY
+                    },
+                    map: map,
+                    title: 'Hello World!',
+                    details: {
+                        opis: "bilo koji podatak * " + i,
+                        poruka: "vidimo se" + i
+                    }
+                });
 
 
-	        marker.addListener('click', function() {
-
-	        	$('#myModal').modal('show')
 
 
-			    /*alert("napraviti modal koji ce da prikazuje podatke za marker " + this.details.opis + "  _ " + this.details.poruka)*/
-			  });	
+                marker.addListener('click', function() {
 
-        }
-
-
-	}); //idle handler
+                    $('#myModal').modal('show')
 
 
-	
- 	} //initHandler
+                    /*alert("napraviti modal koji ce da prikazuje podatke za marker " + this.details.opis + "  _ " + this.details.poruka)*/
+                });
+
+            }
 
 
+        }); //idle handler
+
+
+
+    } //initHandler
     </script>
-   
-  </body>
+</body>
+
 </html>

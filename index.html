@@ -10,7 +10,6 @@
     <title>Upoznaj svog poslanika</title>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
     </script>
-    
     <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -42,8 +41,8 @@
                     <h4 class="modal-title">Modal title</h4>
                 </div>
                 <div class="modal-body">
-                	<div class="videos"></div>
-                	<div class="rss"></div>
+                    <div class="videos"></div>
+                    <div class="rss"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -73,12 +72,12 @@
 
 
     function parseRSS(podaci) {
-    	$(".rss").empty();
+        $(".rss").empty();
 
-    	for (var i = 0; i < podaci.length; i++) {
-    		var tempInput = podaci[i];
-    		$(".rss").append('<a href="'+tempInput.link+'">'+tempInput.title+'</a> <br/>'+tempInput.pubDate+' <br/>')
-    	}
+        for (var i = 0; i < podaci.length; i++) {
+            var tempInput = podaci[i];
+            $(".rss").append('<a href="' + tempInput.link + '">' + tempInput.title + '</a> <br/>' + tempInput.pubDate + ' <br/>')
+        }
     }
 
 
@@ -86,27 +85,27 @@
 
         var FEED_URL = "http://www.naslovi.net/rss/search.php?q=nenad+canak";
 
-        var link =  "http://api.rss2json.com/v1/api.json?rss_url="+FEED_URL +"&callback=parseRSS";
+        var link = "https://api.rss2json.com/v1/api.json?rss_url=" + FEED_URL + "&callback=parseRSS";
 
         $.ajax({
-		    url: link,
-		 
-		    // The name of the callback parameter, as specified by the YQL service
-		    jsonp: "callback",
-		 
-		    // Tell jQuery we're expecting JSONP
-		    dataType: "jsonp",		 
-		    
-		 
-		    // Work with the response
-		    success: function( response ) {
+            url: link,
 
-		    	if(response.status == "ok")
-		        	parseRSS( response.items ); // server response
-		    }
-		});
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
 
-       
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+
+
+            // Work with the response
+            success: function(response) {
+
+                if (response.status == "ok")
+                    parseRSS(response.items); // server response
+            }
+        });
+
+
     }
 
 
@@ -177,9 +176,9 @@
 
 
                 marker.addListener('click', function() {
-					
 
-					
+
+
                     $('#myModal').modal('show')
 
 

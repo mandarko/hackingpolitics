@@ -9,7 +9,7 @@
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
     <title>Upoznaj svog poslanika</title>
     <style>
-    /* Always set the map height explicitly to define the size of the div
+/* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
     
     #map {
@@ -56,31 +56,46 @@
     .modal-dialog {
         margin: 60px 0 0 0;
     }
-
-    .modal-body{
+    
+    .modal-body {
         background-image: url(imgs/Popup_background_1.png);
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 1;
         min-height: 400px;
     }
-
-    .header-opacity{
+    
+    .header-opacity {
         background-color: rgba(255, 255, 255, 0.82);
     }
-    .opacity{
+    
+    .opacity {
         background-color: rgba(255, 255, 255, 0);
     }
     
-    .tab-pane{padding: 20px;}
+    .tab-pane {
+        padding: 20px;
+    }
     
-    #slikaPoslanika{
+    #slikaPoslanika {
         max-height: 120px;
     }
     
-
+    .logo {
+        max-height: 100px;
+    }
+    
+    .navbar-brand {
+        height: 120px;
+    }
+    
+    @media screen and (min-width: 800px) {
+        #bs-example-navbar-collapse-1 .input-group {
+            margin-top: 30px;
+        }
+    }
+}
     </style>
-
     <link rel="stylesheet" type="text/css" href="animate.css">
 </head>
 
@@ -94,7 +109,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="#"><img class="logo" src="imgs/LOGO.svg"></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form class="navbar-form usp-search">
@@ -122,24 +137,20 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Ime i prezime poslanika</h4>
                 </div>
-                <div class="modal-body opacity" >
-
+                <div class="modal-body opacity">
                     <div class="poslanik-details">
                         <img id="slikaPoslanika" src="">
-
                         <h2 id="imePrezime">Ime prezime</h2>
                         <h3 id="stranka">Stranka</h3>
-
                         <p id="godine">Opis poslanika</p>
                         <p id="odbor">Opis poslanika</p>
                         <p id="prijateljstvo">Jos nesto o poslaniku</p>
-
                         <span>Istinomer bar:</span>
-                        <div class="meter "> <!-- red orange -->
+                        <div class="meter ">
+                            <!-- red orange -->
                             <span id="mera" style="width: 80%"></span>
                         </div>
                     </div>
-
                     <ul class="nav nav-pills">
                         <li class=""><a data-toggle="tab" href="#home">Snimci</a></li>
                         <li class="active in"><a data-toggle="tab" href="#menu1">U medijima</a></li>
@@ -172,7 +183,7 @@
     var sirina;
     var duzina;
 
-    var poslanici ;
+    var poslanici;
 
 
     $.getJSON('poslKood.json', function(json, textStatus) {
@@ -231,7 +242,7 @@
 
             var videos = json.items;
 
-            
+
             $(".videos").empty();
 
             for (var i = 0; i < videos.length; i++) {
@@ -272,27 +283,27 @@
 
         google.maps.event.addListenerOnce(map, 'idle', function() {
             for (var i = 0; i < poslanici.length; i++) {
-                
-               /* var pomX = Math.random();
-                var pomY = Math.random();*/
 
-                var tempPosl =  poslanici[i];
+                /* var pomX = Math.random();
+                 var pomY = Math.random();*/
+
+                var tempPosl = poslanici[i];
 
                 var marker = new google.maps.Marker({
                     position: {
-                        lat: +tempPosl.sirina ,
-                        lng: +tempPosl.duzina 
+                        lat: +tempPosl.sirina,
+                        lng: +tempPosl.duzina
                     },
                     map: map,
                     title: 'Hello World!',
                     details: {
-                        ime: tempPosl.ime ,
-                        prezime: tempPosl.prezime ,
-                        stranka : tempPosl.politicke_partije__naziv,
-                        odbor : "odbor",
+                        ime: tempPosl.ime,
+                        prezime: tempPosl.prezime,
+                        stranka: tempPosl.politicke_partije__naziv,
+                        odbor: "odbor",
                         godine: "",
                         grupa: "",
-                        slika:tempPosl.file__path,
+                        slika: tempPosl.file__path,
                         opis: "bilo koji podatak * " + i,
                         poruka: "vidimo se" + i
                     }
@@ -300,25 +311,25 @@
 
                 marker.addListener('click', function() {
 
-                    var poslanikLokal = this.details ;
+                    var poslanikLokal = this.details;
 
                     $("#imePrezime").empty();
-                    $("#stranka").empty();      
-                    $("#godine").empty();   
-                    $("#odbor").empty();    
+                    $("#stranka").empty();
+                    $("#godine").empty();
+                    $("#odbor").empty();
                     $("#prijateljstvo").empty();
-                    
-                    
-                    $("#imePrezime").html(poslanikLokal.ime + " "+poslanikLokal.prezime );
+
+
+                    $("#imePrezime").html(poslanikLokal.ime + " " + poslanikLokal.prezime);
                     $("#stranka").html(poslanikLokal.stranka);
                     $("#godine").html(poslanikLokal.datum_rodjenja);
                     $("#odbor").html("odbor");
                     $("#prijateljstvo").html("prijateljstvo unos");
 
-                    if(poslanikLokal.slika.length >0 && poslanikLokal.slika.length !=null)
-                    $("#slikaPoslanika").attr('src', "http://5.9.127.172/" + poslanikLokal.slika);
-                    else 
-                     $("#slikaPoslanika").attr('src', "imgs/AVATAR.png");//default slika
+                    if (poslanikLokal.slika.length > 0 && poslanikLokal.slika.length != null)
+                        $("#slikaPoslanika").attr('src', "http://5.9.127.172/" + poslanikLokal.slika);
+                    else
+                        $("#slikaPoslanika").attr('src', "imgs/AVATAR.png"); //default slika
 
                     $('#myModal').modal('show')
                 });

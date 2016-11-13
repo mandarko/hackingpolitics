@@ -1,4 +1,4 @@
-avatar i logo
+ logo
 biografija kao tab
 
 Podaci koji su korisceni

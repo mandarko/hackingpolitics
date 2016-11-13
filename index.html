@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
     <title>Upoznaj svog poslanika</title>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
-    </script>
+
     <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -27,13 +26,75 @@
     }
     
     .videoPoslanika {
-        max-width: 100px;
+        max-width: 19.4%;
     }
+
+    .navbar {
+        margin-bottom: 0px;
+    }
+
+    .navbar-default {
+        position: absolute;
+        top: 0px;
+        z-index: 1;
+        width: 100%;
+        background: rgba(255,255,255,0.7);
+    }
+
+    .usp-search {
+        text-align: center;
+    }
+
+    .modal-backdrop.in {
+        opacity: 0.1;
+    }
+
+    .modal.fade:not(.in).left .modal-dialog {
+        -webkit-transform: translate3d(-25%, 0, 0);
+        transform: translate3d(-25%, 0, 0);
+    }
+
+    .modal-dialog {
+        margin: 60px 0 0 0;
+    }
+
     </style>
 </head>
 
 <body>
-    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">          
+          <form class="navbar-form usp-search">
+            <!--<div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>-->
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+          </form>
+
+          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="myModal" class="modal fade left" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -48,14 +109,12 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-    <div id="slickeTest">
-    </div>
+    <div id="slickeTest"></div>
     <div id="map"></div>
+
     <script>
     var sirina;
     var duzina;
@@ -138,7 +197,7 @@
 
     var map;
 
-    function initMap() {
+    window.initMap = function() {
         var myLatLng = {
             lat: 44.363,
             lng: 20.044
@@ -146,7 +205,8 @@
 
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 9,
-            center: myLatLng
+            center: myLatLng,
+            mapTypeControl: false
         });
 
         initHandler();
@@ -178,13 +238,7 @@
                     }
                 });
 
-
-
-
                 marker.addListener('click', function() {
-
-
-
                     $('#myModal').modal('show')
 
 
@@ -203,6 +257,8 @@
 
 
     } //initHandler
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8iROkLemDoQ0DtokakfnPecU0h0rOK9I&callback=initMap">
     </script>
 </body>
 

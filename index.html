@@ -74,6 +74,10 @@
     
     .tab-pane{padding: 20px;}
     
+    #slikaPoslanika{
+        max-height: 120px;
+    }
+    
 
     </style>
 
@@ -121,17 +125,18 @@
                 <div class="modal-body opacity" >
 
                     <div class="poslanik-details">
-                        <img src="">
+                        <img id="slikaPoslanika" src="">
 
                         <h2 id="imePrezime">Ime prezime</h2>
                         <h3 id="stranka">Stranka</h3>
 
-                        <p>Opis poslanika</p>
-                        <p>Jos nesto o poslaniku</p>
+                        <p id="godine">Opis poslanika</p>
+                        <p id="odbor">Opis poslanika</p>
+                        <p id="prijateljstvo">Jos nesto o poslaniku</p>
 
-                        istinomer bar   
+                        <span>Istinomer bar:</span>
                         <div class="meter "> <!-- red orange -->
-                            <span style="width: 80%"></span>
+                            <span id="mera" style="width: 80%"></span>
                         </div>
                     </div>
 
@@ -167,10 +172,16 @@
     var sirina;
     var duzina;
 
+    var poslanici ;
+
+
     $.getJSON('poslKood.json', function(json, textStatus) {
 
         sirina = 44.32;
         duzina = 20;
+
+        poslanici = json;
+
 
     });
 
@@ -204,7 +215,6 @@
             // Tell jQuery we're expecting JSONP
             dataType: "jsonp",
 
-
             // Work with the response
             success: function(response) {
 
@@ -227,7 +237,7 @@
 
             var videos = json.items;
 
-            console.log(videos);
+            
             $(".videos").empty();
 
             for (var i = 0; i < videos.length; i++) {
@@ -267,26 +277,55 @@
     function initHandler(argument) {
 
         google.maps.event.addListenerOnce(map, 'idle', function() {
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < poslanici.length; i++) {
+                
+               /* var pomX = Math.random();
+                var pomY = Math.random();*/
 
-                var pomX = Math.random();
-                var pomY = Math.random();
-
+                var tempPosl =  poslanici[i];
 
                 var marker = new google.maps.Marker({
                     position: {
-                        lat: sirina + pomX,
-                        lng: duzina + pomY
+                        lat: +tempPosl.sirina ,
+                        lng: +tempPosl.duzina 
                     },
                     map: map,
                     title: 'Hello World!',
                     details: {
+                        ime: tempPosl.ime ,
+                        prezime: tempPosl.prezime ,
+                        stranka : tempPosl.politicke_partije__naziv,
+                        odbor : "odbor",
+                        godine: "",
+                        grupa: "",
+                        slika:tempPosl.file__path,
                         opis: "bilo koji podatak * " + i,
                         poruka: "vidimo se" + i
                     }
                 });
 
                 marker.addListener('click', function() {
+
+                    var poslanikLokal = this.details ;
+
+                    $("#imePrezime").empty();
+                    $("#stranka").empty();      
+                    $("#godine").empty();   
+                    $("#odbor").empty();    
+                    $("#prijateljstvo").empty();
+                    
+                    
+                    $("#imePrezime").html(poslanikLokal.ime + " "+poslanikLokal.prezime );
+                    $("#stranka").html(poslanikLokal.stranka);
+                    $("#godine").html(poslanikLokal.datum_rodjenja);
+                    $("#odbor").html("odbor");
+                    $("#prijateljstvo").html("prijateljstvo unos");
+
+                    if(poslanikLokal.slika.length >0 && poslanikLokal.slika.length !=null)
+                    $("#slikaPoslanika").attr('src', "http://5.9.127.172/" + poslanikLokal.slika);
+                    else 
+                     $("#slikaPoslanika").attr('src', "http://5.9.127.172/" + "img/ministers/phRcWaDk8X.jpg");//default slika
+
                     $('#myModal').modal('show')
 
 

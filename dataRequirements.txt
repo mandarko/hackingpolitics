@@ -5,8 +5,12 @@ Podaci koji su korisceni
 
 Preporuke za unapredjenje api-ja
 - struktuiranje OP api-a, podaci za poslanike su duplicirani (objekat osoba)
-- nema  rezultata glasanja 
+ 
 - nije potrebno slati interne podateke (created_at, modified_at)
+- trebalo bi premapirati nazive propertija (drugi nazivi; npr.politicke_partije__naziv )
+- nedostaji profesija, odbor, grupa prijateljstva, rezultati glasanja
+
+- istinomer "top lista"
 
 
 Podaci koje bi trebalo otvoriti

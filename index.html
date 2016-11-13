@@ -135,7 +135,7 @@
             <div class="modal-content opacity">
                 <div class="modal-header header-opacity">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Ime i prezime poslanika</h4>
+                    <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body opacity">
                     <div class="poslanik-details">
@@ -426,6 +426,8 @@
                     $("#prijateljstvo").empty();
                     $(".bio").empty();
 
+
+                     $(".modal-title").html(poslanikLokal.ime + " " + poslanikLokal.prezime);   
 
                     $("#imePrezime").html(poslanikLokal.ime + " " + poslanikLokal.prezime);
                     $("#stranka").html(poslanikLokal.stranka);

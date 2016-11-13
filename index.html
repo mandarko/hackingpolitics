@@ -145,7 +145,8 @@
                         <p id="godine"></p>
                         <p id="odbor"></p>
                         <p id="prijateljstvo"></p>
-                        <span>Istinomer bar:</span>
+                        <span>Trenutna plata: </span>
+                        <p id="plata"></p>
                         <div class="meter ">
                             <!-- red orange -->
                             <span id="mera" style="width: 80%"></span>
@@ -159,11 +160,9 @@
                         <li class=""><a data-toggle="tab" href="#menu3">Istinomer</a></li>
                     </ul>
                     <div class="tab-content opacity">
-                        
                         <div id="bio" class="tab-pane fade opacity">
                             <p class="bio"></p>
                         </div>
-
                         <div id="home" class="tab-pane fade opacity">
                             <div class="videos opacity"></div>
                         </div>
@@ -171,6 +170,82 @@
                             <div class="rss opacity"></div>
                         </div>
                         <div id="menu2" class="tab-pane fade opacity">
+                            <table class="table-amandmani" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <th class="nacelo">Mesec</th>
+                                        <th class="nacelo">Ukupna plata poslanika</th>
+                                        <th class="nacelo">Prosecna plata u Srbiji</th>
+                                        <th class="nacelo">Razlika (ukupna - prosecna)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>januar</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>februar</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>mart</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>april</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>maj</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>jun</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>jul</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>avgust</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>septembar</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>oktobar</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                    <tr>
+                                        <td>novembar</td>
+                                        <td>110.000,00 din</td>
+                                        <td>39.842,00 din</td>
+                                        <td>60.158 din</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div id="menu3" class="tab-pane fade opacity">
                         </div>
@@ -186,10 +261,9 @@
     <div id="slickeTest"></div>
     <div id="map"></div>
     <script>
+    var odbori = ["Ustavna pitanja i zakonodavstvo", "Odbrana i unutrašnji poslovi", "Spoljni poslovi", "Pravosuđe", "Ljudska i manjinska prava i ravnopravnost polova", "Dijaspora i Srbi u regionu", "Privreda", "Finansije", "Poljoprivreda", "Prostorno planiranje", "Obrazovanje", "Kosovo i Metohija", "Kultura i informisanje", "Rad", "Zdravlje i porodica", "Zaštita životne sredine", "Evropske integracije", "Administrativno-budžetska i mandatno imunitetska pitanja", "Kontrola službi bezbednosti", "Prava deteta"];
 
-    var odbori =[ "Ustavna pitanja i zakonodavstvo", "Odbrana i unutrašnji poslovi", "Spoljni poslovi", "Pravosuđe", "Ljudska i manjinska prava i ravnopravnost polova", "Dijaspora i Srbi u regionu", "Privreda", "Finansije", "Poljoprivreda", "Prostorno planiranje", "Obrazovanje", "Kosovo i Metohija", "Kultura i informisanje", "Rad", "Zdravlje i porodica", "Zaštita životne sredine", "Evropske integracije", "Administrativno-budžetska i mandatno imunitetska pitanja", "Kontrola službi bezbednosti", "Prava deteta"   ];
-
-    var grupe_prijatelji = ["Azerbejdžan", "Belorusija", "Velika Britanija", "Grčka", "Izrael", "Italija", "Japan", "Kina", "Kuba", "Nemačka", "Rusija", "SAD", "Francuska", "Hrvatska", "Švajcarska", "Španija"  ];
+    var grupe_prijatelji = ["Azerbejdžan", "Belorusija", "Velika Britanija", "Grčka", "Izrael", "Italija", "Japan", "Kina", "Kuba", "Nemačka", "Rusija", "SAD", "Francuska", "Hrvatska", "Švajcarska", "Španija"];
 
     var odbori_duz = odbori.length;
     var prijatelji_duz = grupe_prijatelji.length;
@@ -229,7 +303,7 @@
 
         //var poslanikIme = "nenad+canak"; //raditi replace
 
-        var FEED_URL = "http://www.naslovi.net/rss/search.php?q="+poslanikIme;
+        var FEED_URL = "http://www.naslovi.net/rss/search.php?q=" + poslanikIme;
 
         var link = "https://api.rss2json.com/v1/api.json?rss_url=" + FEED_URL + "&callback=parseRSS";
 
@@ -293,7 +367,7 @@
 
         initHandler();
 
-      
+
 
     }
 
@@ -307,10 +381,10 @@
 
                 var tempPosl = poslanici[i];
 
-                var tempOdbor = parseInt( Math.random()* odbori_duz);
-                var tempPrijat = parseInt(  Math.random()* prijatelji_duz );
+                var tempOdbor = parseInt(Math.random() * odbori_duz);
+                var tempPrijat = parseInt(Math.random() * prijatelji_duz);
 
-                
+
 
                 var marker = new google.maps.Marker({
                     position: {
@@ -323,23 +397,24 @@
                         ime: tempPosl.ime,
                         prezime: tempPosl.prezime,
                         stranka: tempPosl.politicke_partije__naziv,
-                        bio:tempPosl.biografija,
+                        bio: tempPosl.biografija,
                         odbor: "Odbor za " + odbori[tempOdbor],
                         godine: tempPosl.datum_rodjenja,
-                        grupa: " " +grupe_prijatelji[tempPrijat],
+                        plata: tempPosl.plata,
+                        grupa: " Grupa prijateljstvo : " + grupe_prijatelji[tempPrijat],
                         slika: tempPosl.file__path
                     }
                 });
 
                 marker.addListener('click', function() {
 
-                       
+
 
                     var poslanikLokal = this.details;
 
 
                     listaYTvidea(poslanikLokal.ime + "+" + poslanikLokal.prezime);
-                    getRSS1(poslanikLokal.ime + " " + poslanikLokal.prezime); 
+                    getRSS1(poslanikLokal.ime + " " + poslanikLokal.prezime);
 
                     $("#imePrezime").empty();
                     $("#stranka").empty();
@@ -354,6 +429,7 @@
                     $("#godine").html(poslanikLokal.datum_rodjenja);
                     $("#odbor").html(poslanikLokal.odbor);
                     $("#prijateljstvo").html(poslanikLokal.grupa);
+                    $("#plata").html(poslanikLokal.plata + " din");
 
                     $(".bio").html(poslanikLokal.bio);
 

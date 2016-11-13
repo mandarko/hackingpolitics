@@ -1,3 +1,5 @@
+avatar i logo
+
 Podaci koji su korisceni
 - otvoreni parlament api
 - YT api

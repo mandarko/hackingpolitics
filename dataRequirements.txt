@@ -1,0 +1,14 @@
+Podaci koji su korisceni
+- otvoreni parlament api
+- YT api
+- naslovi.net rss feed
+
+Preporuke za unapredjenje api-ja
+- struktuiranje OP api-a, podaci za poslanike su duplicirani (objekat osoba)
+- nema  rezultata glasanja 
+- nije potrebno slati interne podateke (created_at, modified_at)
+
+
+Podaci koje bi trebalo otvoriti
+
+

@@ -186,6 +186,15 @@
     <div id="slickeTest"></div>
     <div id="map"></div>
     <script>
+
+    var odbori =[ "Ustavna pitanja i zakonodavstvo", "Odbrana i unutrašnji poslovi", "Spoljni poslovi", "Pravosuđe", "Ljudska i manjinska prava i ravnopravnost polova", "Dijaspora i Srbi u regionu", "Privreda", "Finansije", "Poljoprivreda", "Prostorno planiranje", "Obrazovanje", "Kosovo i Metohija", "Kultura i informisanje", "Rad", "Zdravlje i porodica", "Zaštita životne sredine", "Evropske integracije", "Administrativno-budžetska i mandatno imunitetska pitanja", "Kontrola službi bezbednosti", "Prava deteta"   ];
+
+    var grupe_prijatelji = ["Azerbejdžan", "Belorusija", "Velika Britanija", "Grčka", "Izrael", "Italija", "Japan", "Kina", "Kuba", "Nemačka", "Rusija", "SAD", "Francuska", "Hrvatska", "Švajcarska", "Španija"  ];
+
+    var odbori_duz = odbori.length;
+    var prijatelji_duz = grupe_prijatelji.length;
+
+
     var sirina;
     var duzina;
 
@@ -295,6 +304,11 @@
 
                 var tempPosl = poslanici[i];
 
+                var tempOdbor = parseInt( Math.random()* odbori_duz);
+                var tempPrijat = parseInt(  Math.random()* prijatelji_duz );
+
+                
+
                 var marker = new google.maps.Marker({
                     position: {
                         lat: +tempPosl.sirina,
@@ -307,9 +321,9 @@
                         prezime: tempPosl.prezime,
                         stranka: tempPosl.politicke_partije__naziv,
                         bio:tempPosl.biografija,
-                        odbor: "odbor",
+                        odbor: "Odbor za " + odbori[tempOdbor],
                         godine: tempPosl.datum_rodjenja,
-                        grupa: "",
+                        grupa: " " +grupe_prijatelji[tempPrijat],
                         slika: tempPosl.file__path,
                         opis: "bilo koji podatak * " + i,
                         poruka: "vidimo se" + i
@@ -331,8 +345,8 @@
                     $("#imePrezime").html(poslanikLokal.ime + " " + poslanikLokal.prezime);
                     $("#stranka").html(poslanikLokal.stranka);
                     $("#godine").html(poslanikLokal.datum_rodjenja);
-                    $("#odbor").html("odbor");
-                    $("#prijateljstvo").html("prijateljstvo unos");
+                    $("#odbor").html(poslanikLokal.odbor);
+                    $("#prijateljstvo").html(poslanikLokal.grupa);
 
                     $(".bio").html(poslanikLokal.bio);
 

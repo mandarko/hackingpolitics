@@ -225,9 +225,11 @@
     }
 
 
-    function getRSS1(argument) {
+    function getRSS1(poslanikIme) {
 
-        var FEED_URL = "http://www.naslovi.net/rss/search.php?q=nenad+canak";
+        //var poslanikIme = "nenad+canak"; //raditi replace
+
+        var FEED_URL = "http://www.naslovi.net/rss/search.php?q="+poslanikIme;
 
         var link = "https://api.rss2json.com/v1/api.json?rss_url=" + FEED_URL + "&callback=parseRSS";
 
@@ -252,8 +254,10 @@
     }
 
 
-    function listaYTvidea(argument) {
-        $.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + "nenad canak" + '&maxResults=15&order=date&key=AIzaSyC4AE6JNj2vQx_-XpLWHtV4-v5uQR-fM1Q', function(json, textStatus) {
+    function listaYTvidea(poslanikIme) {
+
+        //var poslanikIme = "nenad canak"; //raditi replace
+        $.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + poslanikIme + '&maxResults=15&order=date&key=AIzaSyC4AE6JNj2vQx_-XpLWHtV4-v5uQR-fM1Q', function(json, textStatus) {
 
             var videos = json.items;
 
@@ -289,8 +293,7 @@
 
         initHandler();
 
-        listaYTvidea();
-        getRSS1();
+      
 
     }
 
@@ -324,15 +327,19 @@
                         odbor: "Odbor za " + odbori[tempOdbor],
                         godine: tempPosl.datum_rodjenja,
                         grupa: " " +grupe_prijatelji[tempPrijat],
-                        slika: tempPosl.file__path,
-                        opis: "bilo koji podatak * " + i,
-                        poruka: "vidimo se" + i
+                        slika: tempPosl.file__path
                     }
                 });
 
                 marker.addListener('click', function() {
 
+                       
+
                     var poslanikLokal = this.details;
+
+
+                    listaYTvidea(poslanikLokal.ime + "+" + poslanikLokal.prezime);
+                    getRSS1(poslanikLokal.ime + " " + poslanikLokal.prezime); 
 
                     $("#imePrezime").empty();
                     $("#stranka").empty();

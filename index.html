@@ -142,9 +142,9 @@
                         <img id="slikaPoslanika" src="">
                         <h2 id="imePrezime">Ime prezime</h2>
                         <h3 id="stranka">Stranka</h3>
-                        <p id="godine">Opis poslanika</p>
-                        <p id="odbor">Opis poslanika</p>
-                        <p id="prijateljstvo">Jos nesto o poslaniku</p>
+                        <p id="godine"></p>
+                        <p id="odbor"></p>
+                        <p id="prijateljstvo"></p>
                         <span>Istinomer bar:</span>
                         <div class="meter ">
                             <!-- red orange -->
@@ -152,12 +152,18 @@
                         </div>
                     </div>
                     <ul class="nav nav-pills">
+                        <li class=""><a data-toggle="tab" href="#bio">Biografija</a></li>
                         <li class=""><a data-toggle="tab" href="#home">Snimci</a></li>
                         <li class="active in"><a data-toggle="tab" href="#menu1">U medijima</a></li>
                         <li class=""><a data-toggle="tab" href="#menu2">Plate</a></li>
                         <li class=""><a data-toggle="tab" href="#menu3">Istinomer</a></li>
                     </ul>
                     <div class="tab-content opacity">
+                        
+                        <div id="bio" class="tab-pane fade opacity">
+                            <p class="bio"></p>
+                        </div>
+
                         <div id="home" class="tab-pane fade opacity">
                             <div class="videos opacity"></div>
                         </div>
@@ -300,8 +306,9 @@
                         ime: tempPosl.ime,
                         prezime: tempPosl.prezime,
                         stranka: tempPosl.politicke_partije__naziv,
+                        bio:tempPosl.biografija,
                         odbor: "odbor",
-                        godine: "",
+                        godine: tempPosl.datum_rodjenja,
                         grupa: "",
                         slika: tempPosl.file__path,
                         opis: "bilo koji podatak * " + i,
@@ -318,6 +325,7 @@
                     $("#godine").empty();
                     $("#odbor").empty();
                     $("#prijateljstvo").empty();
+                    $(".bio").empty();
 
 
                     $("#imePrezime").html(poslanikLokal.ime + " " + poslanikLokal.prezime);
@@ -325,6 +333,8 @@
                     $("#godine").html(poslanikLokal.datum_rodjenja);
                     $("#odbor").html("odbor");
                     $("#prijateljstvo").html("prijateljstvo unos");
+
+                    $(".bio").html(poslanikLokal.bio);
 
                     if (poslanikLokal.slika.length > 0 && poslanikLokal.slika.length != null)
                         $("#slikaPoslanika").attr('src', "http://5.9.127.172/" + poslanikLokal.slika);

@@ -58,10 +58,11 @@
     }
 
     .modal-body{
-        background-image: url(imgs/Popup_background.png);
+        background-image: url(imgs/Popup_background_1.png);
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 1;
+        min-height: 400px;
     }
 
     .header-opacity{
@@ -70,8 +71,13 @@
     .opacity{
         background-color: rgba(255, 255, 255, 0);
     }
+    
+    .tab-pane{padding: 20px;}
+    
 
     </style>
+
+    <link rel="stylesheet" type="text/css" href="animate.css">
 </head>
 
 <body>
@@ -110,13 +116,30 @@
             <div class="modal-content opacity">
                 <div class="modal-header header-opacity">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title">Ime i prezime poslanika</h4>
                 </div>
                 <div class="modal-body opacity" >
+
+                    <div class="poslanik-details">
+                        <img src="">
+
+                        <h2 id="imePrezime">Ime prezime</h2>
+                        <h3 id="stranka">Stranka</h3>
+
+                        <p>Opis poslanika</p>
+                        <p>Jos nesto o poslaniku</p>
+
+                        istinomer bar   
+                        <div class="meter "> <!-- red orange -->
+                            <span style="width: 80%"></span>
+                        </div>
+                    </div>
+
                     <ul class="nav nav-pills">
-                        <li class=""><a data-toggle="tab" href="#home">Dokumenta</a></li>
-                        <li class="active in"><a data-toggle="tab" href="#menu1">Informator</a></li>
-                        <li class=""><a data-toggle="tab" href="#menu2">Analiza 2015</a></li>
+                        <li class=""><a data-toggle="tab" href="#home">Snimci</a></li>
+                        <li class="active in"><a data-toggle="tab" href="#menu1">U medijima</a></li>
+                        <li class=""><a data-toggle="tab" href="#menu2">Imovina</a></li>
+                        <li class=""><a data-toggle="tab" href="#menu3">Istinomer</a></li>
                     </ul>
                     <div class="tab-content opacity">
                         <div id="home" class="tab-pane fade opacity">
@@ -126,6 +149,8 @@
                             <div class="rss opacity"></div>
                         </div>
                         <div id="menu2" class="tab-pane fade opacity">
+                        </div>
+                        <div id="menu3" class="tab-pane fade opacity">
                         </div>
                     </div>
                 </div>
@@ -142,7 +167,7 @@
     var sirina;
     var duzina;
 
-    $.getJSON('poslanici.json', function(json, textStatus) {
+    $.getJSON('poslKood.json', function(json, textStatus) {
 
         sirina = 44.32;
         duzina = 20;

@@ -1,4 +1,5 @@
 avatar i logo
+biografija kao tab
 
 Podaci koji su korisceni
 - otvoreni parlament api
